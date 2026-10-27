@@ -60,7 +60,8 @@
   .ouvrir-photo:focus-visible { outline: 2px solid #0A0A0A; outline-offset: 3px; }
   .galerie { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   .galerie .ouvrir-photo { aspect-ratio: 4 / 3; }
-  .photo-atelier { margin: 36px 0 0 0; max-width: 520px; }
+  .photo-atelier { margin: 36px 0 0 0; }
+  .atelier-rangee { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .photo-atelier .ouvrir-photo { aspect-ratio: 4 / 3; }
   .photo-atelier figcaption { margin-top: 10px; }
   #visionneuse { padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
@@ -93,6 +94,7 @@
     .grid-3 > div { padding: 22px 0 !important; border-right: none !important; border-bottom: 1px solid #0A0A0A; }
     .grid-3 > div:last-child { border-bottom: none; }
     .galerie { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .atelier-rangee { gap: 8px; }
     .banniere img { min-height: 200px; }
     .v-prec, .v-suiv { top: auto; bottom: 16px; transform: none; }
     .v-prec { left: calc(50% - 56px); }
@@ -142,9 +144,9 @@
         <h2 style="font-size: 30px; margin-bottom: 20px;">Histoire et racines</h2>
         <p style="font-size: 17px; color: #33332F; max-width: 70ch;">La micro-sculpture est un art séculaire qui a pris des formes variées selon les régions du monde et les époques. À Genève, ses origines remontent au XVIIIᵉ siècle, lorsque les métiers de la décoration horlogère occupaient une place importante au sein de la Fabrique. Plus récemment, le maître coutelier Charles Roulin lui a donné un nouvel essor, en développant au cours des quatre dernières décennies une signature artistique propre à Genève, notamment à travers la création de couteaux d'exception.</p>
         <figure class="photo-atelier">
-          <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2336-1800.jpg">
-            <img src="images/oeuvre-2336-800.jpg" width="800" height="595" loading="lazy" alt="Mains au travail à l'établi, sculptant une pièce sous une loupe éclairante.">
-          </button>
+          <div class="atelier-rangee">
+            <button type="button" class="ouvrir-photo" data-grande="images/atelier-2-1800.jpg"><img src="images/atelier-2-800.jpg" width="800" height="600" loading="lazy" alt="Mains sculptant au burin le décor d'une lame, sous une lumière dorée."></button>            <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2336-1800.jpg"><img src="images/oeuvre-2336-800.jpg" width="800" height="595" loading="lazy" alt="Mains au travail à l'établi, sculptant une pièce sous une loupe éclairante."></button>
+          </div>
           <figcaption class="idx">Le geste, à l'établi</figcaption>
         </figure>
       </div>
@@ -158,6 +160,9 @@
       <h2 style="font-size: 30px; margin-bottom: 16px;">Quelques pièces</h2>
       <p style="font-size: 17px; color: #33332F; max-width: 70ch; margin-bottom: 40px;">Lames, manches et platines sculptés : paysages, scènes animalières et portraits, à l'échelle du millimètre.</p>
       <div class="galerie">
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-dragon-1800.jpg"><img src="images/oeuvre-dragon-800.jpg" width="800" height="800" loading="lazy" alt="Lame ajourée d'un dragon aux écailles finement ciselées crachant des flammes, manche en bois pourpre."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-bouquetins-1800.jpg"><img src="images/oeuvre-bouquetins-800.jpg" width="800" height="533" loading="lazy" alt="Lame ajourée de trois bouquetins sur des rochers, à côté d'un arbre, manche en bois sombre."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-voiliers-1800.jpg"><img src="images/oeuvre-voiliers-800.jpg" width="606" height="800" loading="lazy" alt="Détail d'une lame ajourée : deux voiliers sur l'eau, des roseaux, un arbre et des oiseaux, manche bleu."></button>
         <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2331-1800.jpg"><img src="images/oeuvre-2331-800.jpg" width="800" height="537" loading="lazy" alt="Lame en acier damassé sculptée d'une scène de savane, posée sur du bois ancien."></button>
         <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2334-1800.jpg"><img src="images/oeuvre-2334-800.jpg" width="800" height="463" loading="lazy" alt="Détail d'une lame sculptée d'une harde de cervidés entre les arbres."></button>
         <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2338-1800.jpg"><img src="images/oeuvre-2338-800.jpg" width="800" height="532" loading="lazy" alt="Couteau à manche clair dont la lame est ajourée d'une scène de forêt animée d'animaux."></button>
