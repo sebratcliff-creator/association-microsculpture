@@ -50,6 +50,29 @@
   .form-msg { max-width: 560px; margin: 48px auto 0 auto; padding: 24px; border: 1px solid #0A0A0A; background: #F4F4F2; font-size: 16px; }
   @media (max-width: 600px) { .contact-form .row { grid-template-columns: 1fr; } }
   [id] { scroll-margin-top: 80px; }
+
+  /* Photos */
+  .banniere { margin: 0; border-top: 1px solid #0A0A0A; border-bottom: 1px solid #0A0A0A; background: #8A857F; }
+  .banniere img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: cover; }
+  .ouvrir-photo { display: block; width: 100%; padding: 0; border: 0; background: #F4F4F2; cursor: zoom-in; overflow: hidden; }
+  .ouvrir-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .ouvrir-photo:hover img { transform: scale(1.03); }
+  .ouvrir-photo:focus-visible { outline: 2px solid #0A0A0A; outline-offset: 3px; }
+  .galerie { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .galerie .ouvrir-photo { aspect-ratio: 4 / 3; }
+  .photo-atelier { margin: 36px 0 0 0; max-width: 520px; }
+  .photo-atelier .ouvrir-photo { aspect-ratio: 4 / 3; }
+  .photo-atelier figcaption { margin-top: 10px; }
+  #visionneuse { padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+  #visionneuse::backdrop { background: rgba(10, 10, 10, 0.92); }
+  #visionneuse[open] { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  #visionneuse-img { max-width: 92vw; max-height: 82vh; object-fit: contain; }
+  #visionneuse-legende { color: #C9C9C5; font-size: 14px; max-width: 70ch; text-align: center; margin: 14px 16px 0 16px; }
+  .v-btn { position: absolute; background: none; border: 1px solid #6E6E6A; color: #FFFFFF; font-size: 28px; line-height: 1; width: 48px; height: 48px; cursor: pointer; }
+  .v-btn:hover, .v-btn:focus-visible { border-color: #FFFFFF; outline: none; }
+  .v-fermer { top: 16px; right: 16px; }
+  .v-prec { left: 16px; top: 50%; transform: translateY(-50%); }
+  .v-suiv { right: 16px; top: 50%; transform: translateY(-50%); }
   .nav-burger { display: none; background: none; border: 1.5px solid #0A0A0A; padding: 8px 14px; font-size: 12px; color: #0A0A0A; cursor: pointer; }
 
   /* Téléphones et petites tablettes (les !important priment sur les styles en ligne) */
@@ -69,6 +92,11 @@
     .grid-3 { grid-template-columns: 1fr !important; }
     .grid-3 > div { padding: 22px 0 !important; border-right: none !important; border-bottom: 1px solid #0A0A0A; }
     .grid-3 > div:last-child { border-bottom: none; }
+    .galerie { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .banniere img { min-height: 200px; }
+    .v-prec, .v-suiv { top: auto; bottom: 16px; transform: none; }
+    .v-prec { left: calc(50% - 56px); }
+    .v-suiv { right: calc(50% - 56px); }
   }
 </style>
 </head>
@@ -81,6 +109,7 @@
     <button type="button" class="nav-burger mono" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <div class="nav-links" id="nav-links" style="display: flex; gap: 30px; align-items: center; font-size: 14px;">
       <a href="#histoire" class="nav-link">Histoire</a>
+      <a href="#oeuvres" class="nav-link">Œuvres</a>
       <a href="#reconnaissance" class="nav-link">Reconnaissance</a>
       <a href="#actions" class="nav-link">Actions</a>
       <a href="#association" class="nav-link">L'association</a>
@@ -99,6 +128,12 @@
       <a href="#soutenir" class="btn" style="border-color: #6E6E6A; color: #33332F;">Devenir partenaire</a>
     </div>
   </div>
+
+  <!-- BANNIERE -->
+  <figure class="banniere">
+    <img src="images/banniere-2000.jpg" srcset="images/banniere-1000.jpg 1000w, images/banniere-2000.jpg 2000w" sizes="100vw" width="2000" height="713" fetchpriority="high" alt="Manche de couteau sculpté : un village avec son église, des arbres et, à droite, le portrait d'un homme barbu.">
+  </figure>
+
   <!-- HISTOIRE -->
   <div id="histoire" style="width: 100%; box-sizing: border-box; padding: 70px 6vw; border-bottom: 1px solid #0A0A0A;">
     <div class="grid-12" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px;">
@@ -106,9 +141,42 @@
       <div style="grid-column: span 9;">
         <h2 style="font-size: 30px; margin-bottom: 20px;">Histoire et racines</h2>
         <p style="font-size: 17px; color: #33332F; max-width: 70ch;">La micro-sculpture est un art séculaire qui a pris des formes variées selon les régions du monde et les époques. À Genève, ses origines remontent au XVIIIᵉ siècle, lorsque les métiers de la décoration horlogère occupaient une place importante au sein de la Fabrique. Plus récemment, le maître coutelier Charles Roulin lui a donné un nouvel essor, en développant au cours des quatre dernières décennies une signature artistique propre à Genève, notamment à travers la création de couteaux d'exception.</p>
+        <figure class="photo-atelier">
+          <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2336-1800.jpg">
+            <img src="images/oeuvre-2336-800.jpg" width="800" height="595" loading="lazy" alt="Mains au travail à l'établi, sculptant une pièce sous une loupe éclairante.">
+          </button>
+          <figcaption class="idx">Le geste, à l'établi</figcaption>
+        </figure>
       </div>
     </div>
   </div>
+
+  <!-- OEUVRES -->
+  <div id="oeuvres" style="width: 100%; box-sizing: border-box; padding: 70px 6vw; border-bottom: 1px solid #0A0A0A;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="idx" style="margin-bottom: 14px;">02 — Œuvres</div>
+      <h2 style="font-size: 30px; margin-bottom: 16px;">Quelques pièces</h2>
+      <p style="font-size: 17px; color: #33332F; max-width: 70ch; margin-bottom: 40px;">Lames, manches et platines sculptés : paysages, scènes animalières et portraits, à l'échelle du millimètre.</p>
+      <div class="galerie">
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2331-1800.jpg"><img src="images/oeuvre-2331-800.jpg" width="800" height="537" loading="lazy" alt="Lame en acier damassé sculptée d'une scène de savane, posée sur du bois ancien."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2334-1800.jpg"><img src="images/oeuvre-2334-800.jpg" width="800" height="463" loading="lazy" alt="Détail d'une lame sculptée d'une harde de cervidés entre les arbres."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2338-1800.jpg"><img src="images/oeuvre-2338-800.jpg" width="800" height="532" loading="lazy" alt="Couteau à manche clair dont la lame est ajourée d'une scène de forêt animée d'animaux."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2341-1800.jpg"><img src="images/oeuvre-2341-800.jpg" width="800" height="562" loading="lazy" alt="Deux couteaux pliants, l'un à manche clair, l'autre à manche noir, aux lames sculptées de scènes animalières."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2333-1800.jpg"><img src="images/oeuvre-2333-800.jpg" width="800" height="658" loading="lazy" alt="Petit couteau à manche noir, la lame ajourée d'une scène animalière."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2329-1800.jpg"><img src="images/oeuvre-2329-800.jpg" width="800" height="533" loading="lazy" alt="Deux platines de couteau sculptées de cortèges d'éléphants et d'animaux de la savane."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2335-1800.jpg"><img src="images/oeuvre-2335-800.jpg" width="800" height="552" loading="lazy" alt="Deux couteaux à manche ajouré, chacun orné d'un petit motif animalier sculpté."></button>
+        <button type="button" class="ouvrir-photo" data-grande="images/oeuvre-2327-1800.jpg"><img src="images/oeuvre-2327-800.jpg" width="800" height="747" loading="lazy" alt="Deux pièces miniatures : une petite lame ornée d'un mammouth et une pièce ajourée en forme de goutte."></button>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="visionneuse" aria-label="Photo agrandie">
+    <img id="visionneuse-img" alt="">
+    <p id="visionneuse-legende"></p>
+    <button type="button" class="v-btn v-fermer" aria-label="Fermer">×</button>
+    <button type="button" class="v-btn v-prec" aria-label="Photo précédente">‹</button>
+    <button type="button" class="v-btn v-suiv" aria-label="Photo suivante">›</button>
+  </dialog>
 
   <!-- RECONNAISSANCE -->
   <div id="reconnaissance" style="width: 100%; box-sizing: border-box; padding: 70px 6vw; border-bottom: 1px solid #0A0A0A;">
@@ -257,6 +325,45 @@
 </div>
 
 <script>
+  (function () {
+    var boutons = Array.prototype.slice.call(document.querySelectorAll('.ouvrir-photo'));
+    var visionneuse = document.getElementById('visionneuse');
+    var grande = document.getElementById('visionneuse-img');
+    var legende = document.getElementById('visionneuse-legende');
+    var courant = 0;
+
+    function afficher(i) {
+      courant = (i + boutons.length) % boutons.length;
+      var vignette = boutons[courant].querySelector('img');
+      grande.src = boutons[courant].getAttribute('data-grande');
+      grande.alt = vignette.alt;
+      legende.textContent = vignette.alt;
+    }
+
+    boutons.forEach(function (bouton, i) {
+      bouton.addEventListener('click', function () {
+        afficher(i);
+        visionneuse.showModal();
+      });
+    });
+
+    visionneuse.querySelector('.v-fermer').addEventListener('click', function () { visionneuse.close(); });
+    visionneuse.querySelector('.v-prec').addEventListener('click', function () { afficher(courant - 1); });
+    visionneuse.querySelector('.v-suiv').addEventListener('click', function () { afficher(courant + 1); });
+    // Un clic sur le fond sombre (hors de la photo et des boutons) ferme la visionneuse.
+    visionneuse.addEventListener('click', function (e) {
+      if (e.target === visionneuse) visionneuse.close();
+    });
+    visionneuse.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') afficher(courant - 1);
+      if (e.key === 'ArrowRight') afficher(courant + 1);
+    });
+    visionneuse.addEventListener('close', function () {
+      grande.removeAttribute('src');
+      boutons[courant].focus();
+    });
+  })();
+
   (function () {
     var navToggle = document.getElementById('nav-toggle');
     var navLinks = document.getElementById('nav-links');
