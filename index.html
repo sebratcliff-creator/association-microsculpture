@@ -36,7 +36,7 @@
   .idx { font-family: 'Space Mono', monospace; font-size: 13px; color: #6E6E6A; letter-spacing: 0.06em; }
   button.btn { background: none; font: inherit; font-weight: 600; font-size: 16px; cursor: pointer; }
   button.btn:disabled { opacity: 0.5; cursor: wait; }
-  .contact-form { max-width: 560px; margin: 48px auto 0 auto; text-align: left; display: grid; gap: 20px; }
+  .contact-form { scroll-margin-top: 100px; max-width: 560px; margin: 48px auto 0 auto; text-align: left; display: grid; gap: 20px; }
   .contact-form[hidden], .form-msg[hidden] { display: none; }
   .contact-form label { display: block; font-size: 12px; margin-bottom: 8px; }
   .contact-form input, .contact-form textarea { width: 100%; box-sizing: border-box; padding: 13px 14px; border: 1px solid #0A0A0A; border-radius: 0; background: #FFFFFF; font: inherit; font-size: 16px; color: #0A0A0A; }
@@ -124,7 +124,7 @@
 
   <!-- NAV -->
   <div class="nav" style="width: 100%; box-sizing: border-box; padding: 22px 6vw; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(6px); z-index: 10; border-bottom: 1px solid #0A0A0A;">
-    <div class="mono" style="font-size: 15px; letter-spacing: 0.14em;" title="Association pour la préservation et la promotion du savoir-faire de micro-sculpture">APMIC</div>
+    <a href="#" id="retour-haut" class="mono" style="font-size: 15px; letter-spacing: 0.14em;" title="Association pour la préservation et la promotion du savoir-faire de micro-sculpture — retour en haut de la page">APMIC</a>
     <button type="button" class="nav-burger mono" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <div class="nav-links" id="nav-links" style="display: flex; gap: 30px; align-items: center; font-size: 14px;">
       <a href="#histoire" class="nav-link">Histoire</a>
@@ -471,6 +471,35 @@
       erreur.hidden = true;
       toggle.setAttribute('aria-expanded', String(ouvrir));
       if (ouvrir) document.getElementById('cf-nom').focus();
+    });
+
+    // Les liens « Soutenir » et « Devenir partenaire » ouvrent directement le formulaire.
+    function ouvrirFormulaire() {
+      form.hidden = false;
+      merci.hidden = true;
+      erreur.hidden = true;
+      toggle.setAttribute('aria-expanded', 'true');
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Sur écran tactile, le clavier qui s'ouvrirait masquerait le formulaire.
+      if (!window.matchMedia('(pointer: coarse)').matches) {
+        document.getElementById('cf-nom').focus({ preventScroll: true });
+      }
+    }
+
+    document.querySelectorAll('a[href="#soutenir"]').forEach(function (lien) {
+      lien.addEventListener('click', function (e) {
+        e.preventDefault();
+        history.replaceState(null, '', '#soutenir');
+        ouvrirFormulaire();
+      });
+    });
+    if (location.hash === '#soutenir') ouvrirFormulaire();
+
+    // « APMIC » ramène en haut de la page.
+    document.getElementById('retour-haut').addEventListener('click', function (e) {
+      e.preventDefault();
+      history.replaceState(null, '', location.pathname + location.search);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     form.addEventListener('submit', function (e) {
